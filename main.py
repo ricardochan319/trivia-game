@@ -20,13 +20,13 @@ class TriviaApp:
         self.question_text.set(self.questions[self.current_question_index]["question"])
 
         self.question_label = tk.Label(master, textvariable=self.question_text, wraplength=300, justify=tk.LEFT)
-        self.question_label.pack(pady=(50, 20))  # Increased vertical padding
+        self.question_label.pack(pady=(50, 20))
 
         self.true_button = tk.Button(master, text="True", command=self.check_answer_true)
-        self.true_button.pack(side=tk.LEFT, padx=(40, 5))  # Adjusted horizontal padding
+        self.true_button.pack(side=tk.LEFT, padx=(40, 5))
 
         self.false_button = tk.Button(master, text="False", command=self.check_answer_false)
-        self.false_button.pack(side=tk.RIGHT, padx=(5, 40))  # Adjusted horizontal padding
+        self.false_button.pack(side=tk.RIGHT, padx=(5, 40))
 
     def check_answer_true(self):
         self.check_answer(True)

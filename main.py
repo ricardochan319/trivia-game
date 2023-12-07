@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import requests
+import html
 
 def get_trivia_questions():
     url = "https://opentdb.com/api.php?amount=10&type=boolean"
@@ -17,7 +18,7 @@ class TriviaApp:
         self.current_question_index = 0
 
         self.question_text = tk.StringVar()
-        self.question_text.set(self.questions[self.current_question_index]["question"])
+        self.question_text.set(html.unescape(self.questions[self.current_question_index]["question"]))
 
         self.question_label = tk.Label(master, textvariable=self.question_text, wraplength=300, justify=tk.LEFT)
         self.question_label.pack(pady=(50, 20))
@@ -35,7 +36,7 @@ class TriviaApp:
         self.check_answer(False)
 
     def check_answer(self, user_answer):
-        correct_answer = self.questions[self.current_question_index]["correct_answer"]
+        correct_answer = html.unescape(self.questions[self.current_question_index]["correct_answer"])
         if user_answer == (correct_answer.lower() == "true"):
             messagebox.showinfo("Correct", "You got it right!")
         else:
@@ -49,7 +50,7 @@ class TriviaApp:
             self.show_game_over()
 
     def update_question(self):
-        self.question_text.set(self.questions[self.current_question_index]["question"])
+        self.question_text.set(html.unescape(self.questions[self.current_question_index]["question"]))
 
     def show_game_over(self):
         result = messagebox.askyesno("Game Over", "You've completed all the questions!\nDo you want to play again?")
